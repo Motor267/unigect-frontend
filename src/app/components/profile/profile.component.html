@@ -1,0 +1,297 @@
+<div class="container emp-profile">
+    <form novalidate>
+        <div class="row">
+            <div class="col-md-3">
+                <div class="profile-img">
+                    <img [src]="myUser?.photoUrl" alt="{{myUser?.firstName || myUser?.fname}}" />
+                    <div class="file btn btn-lg btn-primary">
+                        Cambiar foto
+                        <input name="file" type="file" />
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="profile-head">
+                    <h5>
+                        {{myUser?.name || (myUser.fname + ' ' + myUser.lname)}}
+                    </h5>
+                    <h6>
+                        Cliente nivel 1
+                    </h6>
+                    <p class="proile-rating">RANKINGS : <span>8/10</span></p>
+                    <ul class="nav nav-tabs" id="myTab" role="tablist">
+                        <li class="nav-item">
+                            <a aria-controls="home" aria-selected="true" class="nav-link" routerLinkActive="active" data-toggle="tab" href="#home" id="home-tab" role="tab">Información</a>
+                        </li>
+                        <li class="nav-item">
+                            <a aria-controls="edit" aria-selected="false" class="nav-link" routerLinkActive="active" data-toggle="tab" href="#edit" id="edit-tab" role="tab">Editar Perfil</a>
+                        </li>
+                        <li class="nav-item">
+                            <a aria-controls="orders" aria-selected="false" class="nav-link" routerLinkActive="active" data-toggle="tab" href="#orders" id="orders-tab" role="tab">Pedidos</a>
+                        </li>
+                        <li class="nav-item">
+                            <a aria-controls="address" aria-selected="false" class="nav-link" routerLinkActive="active" data-toggle="tab" href="#address" id="address-tab" role="tab">Direcciones</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-2">
+                <button (click)="logout()" class="btn btn-danger btn-sm" name="btnAddMore" type="button">Cerrar sesión</button>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-3">
+                <div class="profile-work">
+                    <p>WORK LINK</p>
+                    <a href="">Website Link</a><br/>
+                    <a href="">Bootsnipp Profile</a><br/>
+                    <a href="">Bootply Profile</a>
+                    <p>SKILLS</p>
+                    <a href="">Web Designer</a><br/>
+                    <a href="">Web Developer</a><br/>
+                    <a href="">WordPress</a><br/>
+                    <a href="">WooCommerce</a><br/>
+                    <a href="">PHP, .Net</a><br/>
+                </div>
+            </div>
+            <div class="col-md-8">
+                <div class="tab-content profile-tab" id="myTabContent">
+                    <div aria-labelledby="home-tab" class="tab-pane fade show" id="home" role="tabpanel">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label>Id</label>
+                            </div>
+                            <div class="col-md-6">
+                                <p>{{myUser.id || myUser.userId}}</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label>Usuario</label>
+                            </div>
+                            <div class="col-md-6">
+                                <p>{{myUser.name || myUser.username}}</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label>Email</label>
+                            </div>
+                            <div class="col-md-6">
+                                <p>{{myUser.email}}</p>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label>Telefono</label>
+                            </div>
+                            <div class="col-md-6">
+                                <p>8712808080</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div aria-labelledby="orders-tab" class="tab-pane fade show" id="orders" role="tabpanel">
+
+                        <div class="ibox-content container product-details" *ngFor="let o of orders">
+                            <div class="row g-0 bg-light position-relative">
+                                <div class="col-md-2 mb-md-0 p-md-4">
+                                    <img [src]="o.image" class="w-100" alt="...">
+                                </div>
+                                <div class="col-md-10 p-4 ps-md-0">
+                                    <h5 class="product-name">{{o.name}}</h5>
+                                    <p>{{o.description}}</p>
+                                    <p class="product-price">{{o.price | currency: 'MXN'}}</p>
+                                    <p>Id del pedido: {{o.id}}</p>
+                                    <span class="product-available">Envío Gratis</span>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div aria-labelledby="edit-tab" class="tab-pane fade show" id="edit" role="tabpanel">
+                        <br>
+                        <form novalidate #myform="ngForm">
+                            <div class="row">
+                                <div class="col-md-10">
+                                    <div class="form-group col-lg-9">
+                                        <label for="email">Correo Electrónico</label>
+                                        <input type="text" name="email" class="form-control" id="email" [(ngModel)]="email">
+                                    </div>
+
+                                    <div class="form-group col-lg-9">
+                                        <label for="fname">Nombre(s)</label>
+                                        <input type="" name="fname" class="form-control" id="fname" [(ngModel)]="fname">
+                                    </div>
+
+                                    <div class="form-group col-lg-9">
+                                        <label for="lname">Apellido(s)</label>
+                                        <input type="" name="lname" class="form-control" id="lname" [(ngModel)]="lname">
+                                    </div>
+
+                                    <div class="form-group col-lg-9">
+                                        <label for="username">Usuario</label>
+                                        <input type="" name="username" class="form-control" id="username" [(ngModel)]="username">
+                                    </div>
+
+                                    <div class="form-group col-lg-9">
+                                        <label for="age">Edad</label>
+                                        <input type="" name="age" class="form-control" id="age" [(ngModel)]="age">
+                                    </div>
+                                </div>
+
+                                <br>
+                                <div class="md-2">
+                                    <button type="submit" (click)="editUser(myform)" class="btn btn-primary">Editar</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+
+                    <div aria-labelledby="address-tab" class="tab-pane fade show" id="address" role="tabpanel">
+                        <br>
+                        <div class="col-md-12">
+                            <div class="row">
+                                <div class="col-md-5 col-sm-6" *ngFor="let a of addresses">
+                                    <div class="card" style="width: 18rem;">
+                                        <div class="card-body">
+                                            <h5 class="card-title">{{a.fullname}}</h5>
+                                            <h6 class="card-subtitle mb-2 text-muted">{{a.pincode}}</h6>
+                                            <p class="card-text">{{a.line1}} {{a.line2}} {{a.phone}}</p>
+                                            <br>
+                                            <div class="modal-footer">
+                                                <button type="submit" (click)="modalAddress(a, addressEdit)" class="btn btn-primary">Editar</button>
+                                                <button type="submit" (click)="deleteAddressUser(a)" class="btn btn-danger">Eliminar</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <br>
+                            <button type="submit" class="btn btn-success" (click)="modalAddressAdd(addressAdd)">Agregar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+
+
+<!-- Edit Address -->
+<ng-template #addressEdit class="modal">
+    <div class="modal-header">
+        <h4 class="modal-title">Dirección</h4>
+    </div>
+    <div class="modal-body">
+        <form novalidate #formAddress="ngForm">
+            <div class="row">
+                <div class="col-md-10">
+                    <div class="form-group col-lg-12">
+                        <label for="fullname">Nombre Completo</label>
+                        <input type="text" name="fullname" class="form-control" id="fullname" [(ngModel)]="address.fullname">
+                    </div>
+
+                    <div class="form-group col-lg-12">
+                        <label for="line1">Linea 1 (Calle y Numero) </label>
+                        <input type="" name="line1" class="form-control" id="line1" [(ngModel)]="address.line1">
+                    </div>
+
+                    <div class="form-group col-lg-12">
+                        <label for="line2">Linea 2 (Colonia) </label>
+                        <input type="" name="line2" class="form-control" id="line2" [(ngModel)]="address.line2">
+                    </div>
+
+                    <div class="form-group col-lg-9">
+                        <label for="state">Estado</label>
+                        <input type="" name="state" class="form-control" id="state" [(ngModel)]="address.state">
+                    </div>
+
+                    <div class="form-group col-lg-9">
+                        <label for="city">Ciudad</label>
+                        <input type="" name="city" class="form-control" id="city" [(ngModel)]="address.city">
+                    </div>
+
+                    <div class="form-group col-lg-9">
+                        <label for="country">País</label>
+                        <input type="" name="country" class="form-control" id="country" [(ngModel)]="address.country">
+                    </div>
+
+                    <div class="form-group col-lg-9">
+                        <label for="pincode">Código Postal</label>
+                        <input type="" name="pincode" class="form-control" id="pincode" [(ngModel)]="address.pincode">
+                    </div>
+
+                    <div class="form-group col-lg-9">
+                        <label for="phone">Telefono</label>
+                        <input type="" name="phone" class="form-control" id="phone" [(ngModel)]="address.phone">
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" (click)="updateAddressUser(formAddress)" class="btn btn-primary">Guardar</button>
+                <button type="button" class="btn btn-secondary" (click)="closeModal(addressEdit)">Close</button>
+            </div>
+        </form>
+    </div>
+</ng-template>
+
+
+<!-- ADD Address -->
+<ng-template #addressAdd class="modal">
+    <div class="modal-header">
+        <h4 class="modal-title">Dirección</h4>
+    </div>
+    <div class="modal-body">
+        <form novalidate #formAddress="ngForm">
+            <div class="row">
+                <div class="col-md-10">
+                    <div class="form-group col-lg-12">
+                        <label for="fullname">Nombre Completo</label>
+                        <input type="text" name="fullname" class="form-control" id="fullname" [(ngModel)]="fullname">
+                    </div>
+
+                    <div class="form-group col-lg-12">
+                        <label for="line1">Linea 1 (Calle y Numero) </label>
+                        <input type="" name="line1" class="form-control" id="line1" [(ngModel)]="line1">
+                    </div>
+
+                    <div class="form-group col-lg-12">
+                        <label for="line2">Linea 2 (Colonia) </label>
+                        <input type="" name="line2" class="form-control" id="line2" [(ngModel)]="line2">
+                    </div>
+
+                    <div class="form-group col-lg-9">
+                        <label for="state">Estado</label>
+                        <input type="" name="state" class="form-control" id="state" [(ngModel)]="state">
+                    </div>
+
+                    <div class="form-group col-lg-9">
+                        <label for="city">Ciudad</label>
+                        <input type="" name="city" class="form-control" id="city" [(ngModel)]="city">
+                    </div>
+
+                    <div class="form-group col-lg-9">
+                        <label for="country">País</label>
+                        <input type="" name="country" class="form-control" id="country" [(ngModel)]="country">
+                    </div>
+
+                    <div class="form-group col-lg-9">
+                        <label for="pincode">Código Postal</label>
+                        <input type="" name="pincode" class="form-control" id="pincode" [(ngModel)]="pincode">
+                    </div>
+
+                    <div class="form-group col-lg-9">
+                        <label for="phone">Telefono</label>
+                        <input type="" name="phone" class="form-control" id="phone" [(ngModel)]="phone">
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" (click)="addAddressUser(formAddress)" class="btn btn-primary">Guardar</button>
+                <button type="button" class="btn btn-secondary" (click)="closeModal(addressEdit)">Close</button>
+            </div>
+        </form>
+    </div>
+</ng-template>

@@ -1,0 +1,15 @@
+<h5 class="col-md-4">
+    Buscaste: {{search}}</h5>
+<div class="ibox-content container product-details" *ngFor="let p of products">
+    <div class="row g-0 bg-light position-relative">
+        <div class="col-md-2 mb-md-0 p-md-4">
+            <img [src]="p.image" class="w-100" alt="..." (click)='selectProduct(p.id)' style="cursor:pointer;">
+        </div>
+        <div class="col-md-6 p-4 ps-md-0">
+            <h5 class="product-name" (click)='selectProduct(p.id)' style="cursor:pointer;">{{p.name}}</h5>
+            <p>{{p.description}}</p>
+            <p class="product-price">{{p.price | currency: 'MXN'}}</p>
+            <span class="product-available">Envío Gratis</span>
+        </div>
+    </div>
+</div>

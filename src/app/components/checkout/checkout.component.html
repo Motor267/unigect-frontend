@@ -1,0 +1,151 @@
+<ngx-spinner bdColor="rgba(151,149,149,0.4)" size="large" color="#ab6bb3" type="ball-clip-rotate-pulse" fullScreen="true">
+    <p style="font-size: 20px; color: black">Realizando Pedido...</p>
+</ngx-spinner>
+
+<div class="section" *ngIf="cartData.total > 0">
+    <!-- container -->
+    <div class="container">
+        <!-- row -->
+        <div class="row">
+
+            <div class="col-md-7">
+                <!-- Billing Details -->
+                <div class="billing-details">
+                    <div class="section-title">
+                        <h3 class="title">Dirección de envío</h3>
+                    </div>
+                    <div class="form-group">
+                        <label for="fullname">Nombre Completo</label>
+                        <input type="text" name="fullname" class="form-control" id="fullname" value="{{address?.fullname}}">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="line1">Linea 1 (Calle y Numero) </label>
+                        <input type="" name="line1" class="form-control" id="line1" value="{{address?.line1}}">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="line2">Linea 2 (Colonia) </label>
+                        <input type="" name="line2" class="form-control" id="line2" value="{{address?.line2}}">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="state">Estado</label>
+                        <input type="" name="state" class="form-control" id="state" value="{{address?.state}}">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="city">Ciudad</label>
+                        <input type="" name="city" class="form-control" id="city" value="{{address?.city}}">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="country">País</label>
+                        <input type="" name="country" class="form-control" id="country" value="{{address?.country}}">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="pincode">Código Postal</label>
+                        <input type="" name="pincode" class="form-control" id="pincode" value="{{address?.pincode}}">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="phone">Telefono</label>
+                        <input type="" name="phone" class="form-control" id="phone" value="{{address?.phone}}">
+                    </div>
+                </div>
+                <!-- /Billing Details -->
+
+                <!-- Shiping Details -->
+                <div class="shiping-details">
+                    <div class="section-title">
+                        <h3 class="title">Intrucciones de envío</h3>
+                    </div>
+                </div>
+                <!-- /Shiping Details -->
+
+                <!-- Order notes -->
+                <div class="order-notes">
+                    <textarea class="input" placeholder="Escribenos una referencía"></textarea>
+                </div>
+                <!-- /Order notes -->
+            </div>
+
+            <!-- Order Details -->
+            <div class="col-md-5 order-details">
+                <div class="section-title text-center">
+                    <h3 class="title">Tu Pedido</h3>
+                </div>
+                <div class="order-summary">
+                    <div class="order-col">
+                        <div><strong>PRODUCTO</strong></div>
+                        <div><strong>SubTotal</strong></div>
+                    </div>
+                    <div class="order-products">
+                        <div class="order-col" *ngFor="let c of cartData.data;">
+                            <div>{{c.numInCart}}x {{c.product.name}}</div>
+                            <div>{{(c.product.price * c.numInCart) | currency:'MXN'}}</div>
+                        </div>
+                    </div>
+                    <div class="order-col">
+                        <div>Envío</div>
+                        <div><strong>GRATIS</strong></div>
+                    </div>
+                    <div class="order-col dropdown-divider">
+                        <div><strong>TOTAL</strong></div>
+                        <div><strong class="order-total">{{cartTotal | currency:'MXN'}}</strong></div>
+                    </div>
+                </div>
+                <div class="payment-method">
+                    <div class="input-radio">
+                        <input type="radio" name="payment" id="payment-1">
+                        <label for="payment-1">
+            <span></span>
+            Tarjeta de Debito / Credito
+          </label>
+                        <div class="caption">
+                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                        </div>
+                    </div>
+                    <div class="input-radio">
+                        <input type="radio" name="payment" id="payment-2">
+                        <label for="payment-2">
+            <span></span>
+            Paypal
+          </label>
+                        <div class="caption">
+                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                        </div>
+                    </div>
+                    <div class="input-radio">
+                        <input type="radio" name="payment" id="payment-3">
+                        <label for="payment-3">
+            <span></span>
+            OXXO
+          </label>
+                        <div class="caption">
+                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="input-checkbox">
+                    <input type="checkbox" id="terms">
+                    <label for="terms">
+          <span></span>
+          He leído y acepto los <a href="#">terminos y condiciones</a>
+        </label>
+                </div>
+                <button type="submit" class="btn-outline-danger btn-sm my-2 btn-block" [disabled]="cartTotal <= 0 " (click)="onCheckout()">Comprar</button>
+            </div>
+            <!-- /Order Details -->
+        </div>
+        <!-- /row -->
+    </div>
+    <!-- /container -->
+</div>
+<!-- /SECTION -->
+
+<div class="text-center my-5" *ngIf="cartData.total <= 0">
+    <h4>Tu carrito esta vacíó</h4>
+    <button class="btn btn-primary btn-lg mt-3" routerLink="/">Continuar comprando</button>
+</div>
